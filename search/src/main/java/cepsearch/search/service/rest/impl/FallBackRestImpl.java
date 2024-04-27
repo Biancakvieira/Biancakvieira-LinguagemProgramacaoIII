@@ -9,12 +9,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FallBackRestImpl implements ExternalCepRestService {
     private final List<String> fallbackOrder;
-    private List<ExternalCepRestService> externalImpl =
+    private final List<ExternalCepRestService> externalImpl =
             List.of(
                     new CepAbertoServiceImpl(),
                     new BrasilApiRestServiceImpl(),
                     new ViaCepRestServiceImpl()
             );
+
+    public FallBackRestImpl(List<String> falbackOrder, List<String> fallbackOrder) {
+        this.fallbackOrder = fallbackOrder;
+    }
 
     @Override
     public Address searchByCep(String cep) {
